@@ -9,6 +9,11 @@ import {
 import { motion, easeOut } from 'framer-motion';
 
 export default function Portfolio() {
+  const [expandedCert, setExpandedCert] = React.useState<number | null>(null);
+  const [expandedProjects, setExpandedProjects] = React.useState<Record<number, boolean>>({});
+  const [expandedEdu, setExpandedEdu] = React.useState<boolean>(false);
+  const [expandedEdu2, setExpandedEdu2] = React.useState<boolean>(false);
+
   const socials = {
     github: "https://github.com/VanchhaiThay",
     telegram: "https://t.me/+85587631748",
@@ -23,22 +28,20 @@ export default function Portfolio() {
       border: "border-yellow-500/20",
       bg: "bg-yellow-500/5",
       items: [
-        { name: "Dart", icon: <Code2 className="w-4 h-4" />, color: "text-sky-300" },
         { name: "JavaScript", icon: <Code2 className="w-4 h-4" />, color: "text-yellow-400" },
-        { name: "HTML5 / CSS3", icon: <Globe className="w-4 h-4" />, color: "text-orange-400" },
+        { name: "HTML / CSS", icon: <Globe className="w-4 h-4" />, color: "text-orange-400" },
         { name: "Python", icon: <Code2 className="w-4 h-4" />, color: "text-yellow-300" },
       ],
     },
     {
-      label: "Frameworks",
+      label: "Program & Framework",
       accent: "text-cyan-400",
       border: "border-cyan-500/20",
       bg: "bg-cyan-500/5",
       items: [
         { name: "Flutter", icon: <Smartphone className="w-4 h-4" />, color: "text-blue-400" },
-        { name: "React / Next.js", icon: <Zap className="w-4 h-4" />, color: "text-cyan-400" },
-        { name: "Node.js", icon: <Zap className="w-4 h-4" />, color: "text-green-400" },
-        { name: "FastAPI", icon: <Zap className="w-4 h-4" />, color: "text-teal-400" },
+        { name: "NodeJS", icon: <Zap className="w-4 h-4" />, color: "text-green-400" },
+        { name: "NextJS", icon: <Zap className="w-4 h-4" />, color: "text-cyan-400" },
       ],
     },
     {
@@ -58,22 +61,26 @@ export default function Portfolio() {
 
   const workExperience = [
     {
-      title: "Mobile Application Developer",
-      company: "Top Auto",
+      title: "Mobile Application Development",
+      company: "JDM STORE APP",
       period: "March 2026 – June 2026",
-      tags: ["Flutter", "Node.js", "MongoDB", "Provider"],
+      tags: ["Flutter", "Node.js", "MongoDB", "Provider", "Git"],
       description: "Developed a full-stack e-commerce solution featuring robust state management and a responsive architecture for mobile, tablet, and desktop. Architected the entire application structure to ensure scalability and maintainability.",
       accent: "emerald",
       active: true,
+      github: "https://github.com/vonseyha/jdm-store-app",
+      demo: "#",
     },
     {
-      title: "Mobile Application Developer",
+      title: "Mobile Application Development",
       company: "JDM MERCHANT",
       period: "March 2026 – June 2026",
-      tags: ["Flutter", "Firebase", "Hive", "Provider"],
-      description: "Built a comprehensive merchant POS application for auto parts sales featuring authentication, inventory management, order processing, and reporting. Implemented feature-first architecture with modular components.",
+      tags: ["Flutter", "NodeJS", "MongoDB", "Provider", "Git"],
+      description: "Developed a comprehensive merchant POS application for auto parts sales featuring authentication, inventory management, order processing, and reporting capabilities. Implemented feature-first architecture with modular components for products, POS, orders, customers, suppliers, and wallet management.",
       accent: "indigo",
       active: false,
+      github: "https://github.com/vonseyha/-jdm-merchant-app",
+      demo: "#",
     },
   ];
 
@@ -81,50 +88,57 @@ export default function Portfolio() {
     {
       name: "RUPP | EduHub",
       period: "Feb 2026 – Jun 2026",
-      tags: ["Flutter", "Firebase", "Supabase", "Figma"],
+      tags: ["Flutter", "Firebase", "Supabase", "Figma", "Nodejs", "pgAdmin", "Git"],
       desc: "Khmer Education platform with 4-language detection, dual student/teacher portals, real-time messaging, and assignment dashboard.",
       color: "from-indigo-500/10 to-transparent",
       border: "border-indigo-500/20",
       dot: "bg-indigo-500",
+      github: "https://github.com/VanchhaiThay/eduhub",
+      demo: "#",
+      video: "/eduhub.mp4",
+    },
+    {
+      name: "RUPP | Khmer Learning App",
+      period: "Oct 2025 – Jan 2026",
+      tags: ["Flutter", "Firebase", "Figma", "Dicebear", "Git"],
+      desc: "Full-stack Khmer language learning app focused on interactive UI/UX and seamless data synchronization.",
+      color: "from-rose-500/10 to-transparent",
+      border: "border-rose-500/20",
+      dot: "bg-rose-500",
+      github: "https://github.com/VanchhaiThay/khmer_learning",
+      demo: "#",
+      video: "/khmerlearning.mp4",
     },
     {
       name: "Plant Disease Detection",
       period: "Sep 2025 – Dec 2025",
-      tags: ["Python", "FastAPI", "Streamlit", "Groq API", "Meta Llama"],
+      tags: ["Python", "Meta Llama", "FastAPI", "Streamlit", "Groq API", "Git"],
       desc: "AI system identifying 500+ plant diseases. FastAPI backend with sub-5-second inference, Streamlit frontend with drag-and-drop uploads.",
       color: "from-emerald-500/10 to-transparent",
       border: "border-emerald-500/20",
       dot: "bg-emerald-500",
     },
     {
-      name: "RUPP | Khmer Learning App",
-      period: "Oct 2025 – Jan 2026",
-      tags: ["Flutter", "Firebase", "Figma", "Dicebear"],
-      desc: "Full-stack Khmer language learning app focused on interactive UI/UX and seamless data synchronization.",
-      color: "from-rose-500/10 to-transparent",
-      border: "border-rose-500/20",
-      dot: "bg-rose-500",
-    },
-    {
       name: "The Wild Oasis",
       period: "Nov 2024 – Jan 2025",
-      tags: ["Next.js", "Node.js", "Vercel"],
+      tags: ["Next.js", "Node.js", "Git", "Vercel"],
       desc: "High-performance hotel booking web app with dynamic routing, real-time API handling, and a secure multi-level authorization system.",
       color: "from-amber-500/10 to-transparent",
       border: "border-amber-500/20",
       dot: "bg-amber-500",
+      demo: "https://the-wild-oasis-website.vercel.app/cabins",
     },
   ];
 
   const certifications = [
-    { name: "Game Application Development", org: "RUPP", period: "Jan 2026 – Jun 2026" },
-    { name: "AWS Training – Machine Learning", org: "RUPP", period: "Oct 2025 – Dec 2025" },
-    { name: "Analyze Mobile Application", org: "RUPP", period: "Jan 2024 – Jun 2024" },
-    { name: "Chinese Language", org: "SE Asia Language School", period: "May 2024 – Aug 2024" },
+    { name: "Game Application Development", org: "RUPP", period: "Jan 2026 – Jun 2026", image: "/game.png" },
+    { name: "AWS Training ML", org: "RUPP", period: "Oct 2025 – Dec 2025", image: "/aws.png" },
+    { name: "Analyze Application", org: "RUPP", period: "Jan 2024 – Jun 2024", image: undefined },
+    { name: "Chinese", org: "Southeast Asia Language School", period: "May 2024 – Aug 2024", image: "/chinese.png" },
   ];
 
   const aiTools = ["Antigravity Agent", "Codex", "Copilot", "Blackbox", "Gemini", "ChatGPT"];
-  const devTools = ["Antigravity", "GitHub", "VSCode", "Android Studio", "Laragon", "Figma", "Postman"];
+  const devTools = ["Antigravity", "VsCode", "Devin", "Android Studio", "Postman", "Trello", "Vercel", "GitHub", "Figma", "Canva"];
 
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -205,6 +219,20 @@ export default function Portfolio() {
                     ))}
                   </div>
                   <p className="text-zinc-400 text-sm leading-relaxed">{job.description}</p>
+                  {(job.github || job.demo) && (
+                    <div className="flex gap-4 mt-4 pt-4 border-t border-white/5">
+                      {job.github && (
+                        <a href={job.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors">
+                          <Github className="w-4 h-4" /> Source Code
+                        </a>
+                      )}
+                      {job.demo && (
+                        <a href={job.demo} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors">
+                          <Globe className="w-4 h-4" /> Live Demo
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -222,7 +250,7 @@ export default function Portfolio() {
               <motion.div
                 key={i}
                 whileHover={{ y: -6, scale: 1.01 }}
-                className={`bg-gradient-to-br ${p.color} border ${p.border} p-6 rounded-3xl backdrop-blur-md transition-shadow hover:shadow-xl`}
+                className={`bg-gradient-to-br ${p.color} border ${p.border} p-6 rounded-3xl backdrop-blur-md transition-shadow hover:shadow-xl flex flex-col`}
               >
                 <div className="flex items-center gap-2 mb-3">
                   <div className={`w-2 h-2 rounded-full ${p.dot}`} />
@@ -235,6 +263,42 @@ export default function Portfolio() {
                     <span key={tag} className="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 rounded text-zinc-500 uppercase tracking-tighter">{tag}</span>
                   ))}
                 </div>
+                {(p.github || p.demo || p.video) && (
+                  <div className="flex gap-4 pt-4 mt-auto border-t border-white/5 relative z-20">
+                    {p.github && (
+                      <a href={p.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-semibold text-zinc-400 hover:text-white transition-colors">
+                        <Github className="w-4 h-4" /> Source Code
+                      </a>
+                    )}
+                    {p.video ? (
+                      <button 
+                        onClick={() => setExpandedProjects(prev => ({ ...prev, [i]: !prev[i] }))}
+                        className="flex items-center gap-2 text-xs font-semibold text-zinc-400 hover:text-white transition-colors focus:outline-none"
+                      >
+                        <Globe className="w-4 h-4" /> Live Demo
+                        <ChevronRight className={`w-3 h-3 transition-transform ${expandedProjects[i] ? 'rotate-90' : ''}`} />
+                      </button>
+                    ) : p.demo && (
+                      <a href={p.demo} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-semibold text-zinc-400 hover:text-white transition-colors">
+                        <Globe className="w-4 h-4" /> Live Demo
+                      </a>
+                    )}
+                  </div>
+                )}
+                {p.video && (
+                  <div className={`grid transition-all duration-300 ease-in-out ${expandedProjects[i] ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
+                    <div className="overflow-hidden">
+                      <video 
+                        src={p.video} 
+                        autoPlay 
+                        loop 
+                        muted 
+                        playsInline 
+                        className="w-full rounded-xl border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]"
+                      />
+                    </div>
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
@@ -246,15 +310,51 @@ export default function Portfolio() {
             <div className="p-3 bg-indigo-500/10 rounded-2xl text-indigo-500"><GraduationCap size={24} /></div>
             <h2 className="text-3xl font-bold tracking-tight">Education</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div whileHover={{ y: -5 }} className="bg-gradient-to-br from-zinc-900/50 to-transparent border border-white/5 p-8 rounded-[2.5rem] shadow-2xl backdrop-blur-md">
-              <h3 className="text-xl font-bold text-white mb-2">Bachelor of IT Engineering</h3>
-              <p className="text-indigo-400 text-sm mb-4 font-medium uppercase tracking-widest">RUPP · 2022 — Present</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+            <motion.div 
+              whileHover={{ y: -5 }} 
+              onClick={() => setExpandedEdu(!expandedEdu)}
+              className="bg-gradient-to-br from-zinc-900/50 to-transparent border border-white/5 p-8 rounded-[2.5rem] shadow-2xl backdrop-blur-md cursor-pointer transition-colors hover:bg-white/[0.02] group"
+            >
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">Bachelor of IT Engineering</h3>
+                  <p className="text-indigo-400/80 text-sm mb-4 font-medium uppercase tracking-widest">RUPP · 2022 — Present</p>
+                </div>
+                <div className={`p-2 bg-white/5 rounded-full transition-transform duration-300 ${expandedEdu ? 'rotate-90' : ''}`}>
+                  <ChevronRight className="w-5 h-5 text-zinc-400" />
+                </div>
+              </div>
               <div className="h-1 w-12 bg-indigo-500 rounded-full" />
+              
+              <div className={`grid transition-all duration-300 ease-in-out ${expandedEdu ? 'grid-rows-[1fr] opacity-100 mt-6' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
+                <div className="overflow-hidden flex flex-col gap-4">
+                  <img src="/point1.png" alt="IT Engineering Details 1" className="w-full rounded-xl border border-white/10 shadow-[0_0_15px_rgba(99,102,241,0.1)]" />
+                  <img src="/point2.png" alt="IT Engineering Details 2" className="w-full rounded-xl border border-white/10 shadow-[0_0_15px_rgba(99,102,241,0.1)]" />
+                </div>
+              </div>
             </motion.div>
-            <motion.div whileHover={{ y: -5 }} className="bg-zinc-900/20 border border-white/5 p-8 rounded-[2.5rem] flex flex-col justify-center">
-              <h3 className="text-xl font-bold text-white">Sreng Kim High School</h3>
-              <p className="text-zinc-500 text-sm mt-1">Bac II Certificate · 2019 — 2022</p>
+            <motion.div 
+              whileHover={{ y: -5 }} 
+              onClick={() => setExpandedEdu2(!expandedEdu2)}
+              className="bg-zinc-900/20 border border-white/5 p-8 rounded-[2.5rem] flex flex-col justify-start cursor-pointer transition-colors hover:bg-white/[0.02] group"
+            >
+              <div className="flex justify-between items-start w-full">
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition-colors">Sreng Kim High School</h3>
+                  <p className="text-zinc-500 text-sm mb-4">Bac II Certificate · 2019 — 2022</p>
+                </div>
+                <div className={`p-2 bg-white/5 rounded-full transition-transform duration-300 ${expandedEdu2 ? 'rotate-90' : ''}`}>
+                  <ChevronRight className="w-5 h-5 text-zinc-400" />
+                </div>
+              </div>
+              <div className="h-1 w-12 bg-zinc-700 rounded-full" />
+              
+              <div className={`grid transition-all duration-300 ease-in-out ${expandedEdu2 ? 'grid-rows-[1fr] opacity-100 mt-6' : 'grid-rows-[0fr] opacity-0 mt-0'}`}>
+                <div className="overflow-hidden flex flex-col gap-4">
+                  <img src="/highschool.png" alt="High School Details" className="w-full rounded-xl border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]" />
+                </div>
+              </div>
             </motion.div>
           </div>
         </motion.section>
@@ -378,16 +478,40 @@ export default function Portfolio() {
             <div className="p-3 bg-amber-500/10 rounded-2xl text-amber-400"><Award size={24} /></div>
             <h2 className="text-3xl font-bold tracking-tight">Certifications</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
             {certifications.map((cert, i) => (
               <motion.div
                 key={i}
                 whileHover={{ y: -4 }}
-                className="p-5 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-amber-500/20 transition-colors group"
+                onClick={() => setExpandedCert(expandedCert === i ? null : i)}
+                className={`p-5 bg-white/[0.02] border border-white/5 rounded-2xl transition-all group ${cert.image ? 'cursor-pointer' : ''} ${expandedCert === i ? 'border-amber-500/50 bg-white/[0.04]' : 'hover:border-amber-500/20'}`}
               >
-                <p className="text-xs text-amber-500/70 font-semibold uppercase tracking-widest mb-1 group-hover:text-amber-400 transition-colors">{cert.org}</p>
-                <h3 className="text-base font-bold text-zinc-100">{cert.name}</h3>
-                <p className="text-xs text-zinc-600 mt-1">{cert.period}</p>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-xs text-amber-500/70 font-semibold uppercase tracking-widest mb-1 group-hover:text-amber-400 transition-colors">{cert.org}</p>
+                    <h3 className="text-base font-bold text-zinc-100">{cert.name}</h3>
+                    <p className="text-xs text-zinc-600 mt-1">{cert.period}</p>
+                  </div>
+                  {cert.image && (
+                    <motion.div 
+                      animate={{ rotate: expandedCert === i ? 90 : 0 }}
+                      className="text-zinc-500 mt-2"
+                    >
+                      <ChevronRight size={20} />
+                    </motion.div>
+                  )}
+                </div>
+                {cert.image && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: expandedCert === i ? 'auto' : 0, opacity: expandedCert === i ? 1 : 0 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pt-4 mt-4 border-t border-white/10">
+                      <img src={cert.image} alt={cert.name} className="w-full rounded-xl" />
+                    </div>
+                  </motion.div>
+                )}
               </motion.div>
             ))}
           </div>
